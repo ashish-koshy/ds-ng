@@ -1,0 +1,107 @@
+<div class="ds-layout">
+  <aside class="ds-sidebar">
+    <div class="sidebar-body">
+      <div class="sidebar-header d-flex align-items-center gap-2">
+        <a routerLink="/" style="color: #64748b; text-decoration: none"
+          ><mat-icon>arrow_back</mat-icon></a
+        >
+        <h1>Linked List</h1>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Controls</div>
+        <div class="sidebar-controls">
+          <input
+            class="sidebar-input"
+            type="number"
+            placeholder="Value"
+            [(ngModel)]="inputValue"
+          />
+          <div class="controls-row">
+            <button class="sidebar-btn primary" (click)="prepend()">
+              <mat-icon>first_page</mat-icon> Prepend
+            </button>
+            <button class="sidebar-btn primary" (click)="append()">
+              <mat-icon>last_page</mat-icon> Append
+            </button>
+          </div>
+          <div class="controls-row">
+            <button class="sidebar-btn" (click)="removeHead()">
+              <mat-icon>remove</mat-icon> Rm Head
+            </button>
+            <button class="sidebar-btn" (click)="removeTail()">
+              <mat-icon>remove</mat-icon> Rm Tail
+            </button>
+          </div>
+          <div class="controls-row">
+            <button class="sidebar-btn" (click)="reverse()">
+              <mat-icon>swap_horiz</mat-icon> Reverse
+            </button>
+            <button
+              class="sidebar-btn icon-only"
+              (click)="reset()"
+              title="Reset"
+            >
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      @if (message()) {
+        <div class="msg-banner" style="margin-bottom: 10px">
+          {{ message() }}
+        </div>
+      }
+      <div class="section-label">Complexity</div>
+      <div class="complexity-grid">
+        <div class="complexity-chip">
+          <span class="chip-label">Prepend</span
+          ><span class="chip-value green">O(1)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Append</span
+          ><span class="chip-value green">O(1)*</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Search</span
+          ><span class="chip-value amber">O(n)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Delete</span
+          ><span class="chip-value amber">O(n)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="ds-canvas-area">
+    <ds-zoom-canvas>
+      <div class="ll-vis d-flex align-items-center gap-0">
+        <div class="null-label me-1">NULL &larr;</div>
+        @for (item of list(); track $index; let last = $last) {
+          <div class="node-group d-flex align-items-center">
+            <div
+              class="node d-flex flex-column align-items-center"
+              [class.highlighted]="highlightIndex() === $index"
+            >
+              <div class="node-value">{{ item }}</div>
+              <div class="node-next">next &rarr;</div>
+            </div>
+            @if (!last) {
+              <div class="arrow mx-1">&rarr;</div>
+            }
+          </div>
+        }
+        @if (list().length > 0) {
+          <div class="null-label ms-1">&rarr; NULL</div>
+        }
+        @if (list().length === 0) {
+          <div class="empty-state">NULL (empty list)</div>
+        }
+      </div>
+    </ds-zoom-canvas>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+$accent: #f59e0b;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.queue-vis {
+  white-space: nowrap;
+}
+
+.queue-labels-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.queue-label-pair {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px 4px;
+
+  .qlabel {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+}
+
+.queue-container {
+  border: 2px solid $accent;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 80px;
+  min-width: 60px;
+  background: #1e2330;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.queue-item {
+  width: 72px;
+  height: 80px;
+  border-right: 1px solid #2d3348;
+  background: #1e2330;
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  .item-value {
+    font-size: 17px;
+    font-weight: 600;
+  }
+
+  .qlabel-inner {
+    font-size: 10px;
+    color: $accent;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  &.front-item {
+    border-left: 3px solid $accent;
+  }
+
+  &.rear-item {
+    border-right: 3px solid $accent;
+  }
+
+  &.front-highlighted,
+  &.rear-highlighted {
+    background: $accent;
+    color: white;
+
+    .qlabel-inner {
+      color: white;
+    }
+  }
+}
+
+.arrow-icon {
+  color: $accent;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
+}
+
+.empty-state {
+  padding: 24px;
+  color: #94a3b8;
+}

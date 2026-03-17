@@ -1,0 +1,108 @@
+<div class="ds-layout">
+  <aside class="ds-sidebar">
+    <div class="sidebar-body">
+      <div class="sidebar-header d-flex align-items-center gap-2">
+        <a routerLink="/" style="color: #64748b; text-decoration: none"
+          ><mat-icon>arrow_back</mat-icon></a
+        >
+        <h1>Queue</h1>
+        <span class="badge-label">FIFO</span>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Controls</div>
+        <div class="sidebar-controls">
+          <input
+            class="sidebar-input"
+            type="number"
+            placeholder="Value"
+            [(ngModel)]="inputValue"
+          />
+          <div class="controls-row">
+            <button class="sidebar-btn primary" (click)="enqueue()">
+              <mat-icon>add</mat-icon> Enqueue
+            </button>
+            <button class="sidebar-btn" (click)="dequeue()">
+              <mat-icon>remove</mat-icon> Dequeue
+            </button>
+            <button class="sidebar-btn" (click)="front()">
+              <mat-icon>first_page</mat-icon> Front
+            </button>
+            <button
+              class="sidebar-btn icon-only"
+              (click)="reset()"
+              title="Reset"
+            >
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      @if (message()) {
+        <div class="msg-banner" style="margin-bottom: 10px">
+          {{ message() }}
+        </div>
+      }
+      <div class="section-label">Complexity</div>
+      <div class="complexity-grid">
+        <div class="complexity-chip">
+          <span class="chip-label">Enqueue</span
+          ><span class="chip-value green">O(1)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Dequeue</span
+          ><span class="chip-value green">O(1)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Peek Front</span
+          ><span class="chip-value green">O(1)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="ds-canvas-area">
+    <ds-zoom-canvas>
+      <div class="queue-vis d-flex align-items-center gap-2">
+        <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+        <div class="queue-labels-row">
+          <div class="queue-label-pair">
+            <span class="qlabel">FRONT</span>
+            <span class="qlabel">REAR</span>
+          </div>
+          <div class="queue-container d-flex">
+            @if (queue().length === 0) {
+              <div class="empty-state">Queue is empty</div>
+            }
+            @for (
+              item of queue();
+              track $index;
+              let first = $first;
+              let last = $last
+            ) {
+              <div
+                class="queue-item d-flex flex-column align-items-center justify-content-center"
+                [class.front-item]="first"
+                [class.rear-item]="last"
+                [class.front-highlighted]="first && highlightFront()"
+                [class.rear-highlighted]="last && highlightRear()"
+              >
+                <span class="item-value">{{ item }}</span>
+                @if (first) {
+                  <span class="qlabel-inner">front</span>
+                }
+                @if (last && !first) {
+                  <span class="qlabel-inner">rear</span>
+                }
+              </div>
+            }
+          </div>
+        </div>
+        <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+      </div>
+    </ds-zoom-canvas>
+  </div>
+</div>

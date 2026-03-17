@@ -1,0 +1,30 @@
+<nav class="app-nav">
+  <div class="container d-flex align-items-center">
+    <a routerLink="/" class="nav-brand d-flex align-items-center gap-2">
+      <mat-icon>account_tree</mat-icon>
+      <span>DS Visual</span>
+    </a>
+    <div class="nav-links ms-auto d-flex align-items-center gap-1">
+      <a routerLink="/array" routerLinkActive="active" class="nav-link"
+        >Array</a
+      >
+      <a routerLink="/linked-list" routerLinkActive="active" class="nav-link"
+        >Linked List</a
+      >
+      <a routerLink="/stack" routerLinkActive="active" class="nav-link"
+        >Stack</a
+      >
+      <a routerLink="/queue" routerLinkActive="active" class="nav-link"
+        >Queue</a
+      >
+      <a routerLink="/tree" routerLinkActive="active" class="nav-link">Tree</a>
+      <a routerLink="/graph" routerLinkActive="active" class="nav-link"
+        >Graph</a
+      >
+    </div>
+  </div>
+</nav>
+
+<main class="app-main">
+  <router-outlet />
+</main>

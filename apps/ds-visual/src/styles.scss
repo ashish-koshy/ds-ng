@@ -1,0 +1,226 @@
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
+        use-system-variables: true,
+      ),
+      typography: (
+        use-system-variables: true,
+      ),
+      density: 0,
+    )
+  );
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background: #0f1117;
+  color: #e2e8f0;
+  overflow: hidden;
+}
+
+// ─── Split layout (Google Maps style) ───
+.ds-layout {
+  display: flex;
+  height: calc(100vh - 56px); // below nav
+}
+
+.ds-sidebar {
+  width: 320px;
+  min-width: 320px;
+  background: #161921;
+  border-right: 1px solid #1e2330;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+
+.sidebar-body {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar-footer {
+  border-top: 1px solid #1e2330;
+  padding: 12px 20px;
+  background: #161921;
+}
+
+.sidebar-header {
+  padding: 20px 20px 12px;
+  border-bottom: 1px solid #1e2330;
+
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin: 0;
+    letter-spacing: -0.3px;
+  }
+
+  .badge-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+  }
+}
+
+.sidebar-section {
+  padding: 16px 20px;
+  border-bottom: 1px solid #1e2330;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+
+.sidebar-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.controls-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sidebar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 7px 14px;
+  border: 1px solid #2d3348;
+  border-radius: 8px;
+  background: #1e2330;
+  font-size: 13px;
+  font-weight: 500;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.15s;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background: #262d3d;
+    border-color: #3b4461;
+  }
+
+  &.primary {
+    background: #6366f1;
+    color: white;
+    border-color: #6366f1;
+
+    &:hover {
+      background: #4f46e5;
+    }
+  }
+
+  &.icon-only {
+    padding: 7px;
+  }
+}
+
+.sidebar-input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #2d3348;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+  background: #1e2330;
+  color: #e2e8f0;
+
+  &:focus {
+    border-color: #6366f1;
+  }
+
+  &::placeholder {
+    color: #475569;
+  }
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.msg-banner {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(99, 102, 241, 0.12);
+  color: #a5b4fc;
+  text-align: center;
+}
+
+// ─── Complexity chips ───
+.complexity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.complexity-chip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: #1e2330;
+
+  .chip-label {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+
+  .chip-value {
+    font-size: 13px;
+    font-weight: 700;
+    font-family: 'Roboto Mono', monospace;
+
+    &.green {
+      color: #10b981;
+    }
+    &.amber {
+      color: #f59e0b;
+    }
+    &.red {
+      color: #ef4444;
+    }
+  }
+}
+
+// ─── Canvas area (right side) ───
+.ds-canvas-area {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}

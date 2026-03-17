@@ -1,0 +1,180 @@
+<div class="ds-layout">
+  <aside class="ds-sidebar">
+    <div class="sidebar-body">
+      <div class="sidebar-header d-flex align-items-center gap-2">
+        <a routerLink="/" style="color: #64748b; text-decoration: none"
+          ><mat-icon>arrow_back</mat-icon></a
+        >
+        <h1>Graph</h1>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Add / Remove Node</div>
+        <div class="sidebar-controls">
+          <div class="input-row">
+            <input
+              class="sidebar-input"
+              type="text"
+              placeholder="Node ID (e.g. G)"
+              [(ngModel)]="nodeInput"
+              maxlength="3"
+            />
+            <button class="sidebar-btn primary" (click)="addNode()">
+              <mat-icon>add</mat-icon> Add
+            </button>
+            <button class="sidebar-btn" (click)="removeNode()">
+              <mat-icon>close</mat-icon> Rm
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Add Edge</div>
+        <div class="sidebar-controls">
+          <div class="input-row">
+            <input
+              class="sidebar-input"
+              type="text"
+              placeholder="From"
+              [(ngModel)]="edgeFrom"
+              maxlength="3"
+            />
+            <input
+              class="sidebar-input"
+              type="text"
+              placeholder="To"
+              [(ngModel)]="edgeTo"
+              maxlength="3"
+            />
+            <button class="sidebar-btn primary" (click)="addEdge()">
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Traversals</div>
+        <div class="controls-row">
+          <button
+            class="sidebar-btn"
+            [class.active]="activeTraversal() === 'bfs'"
+            (click)="runBfs()"
+          >
+            BFS
+          </button>
+          <button
+            class="sidebar-btn"
+            [class.active]="activeTraversal() === 'dfs'"
+            (click)="runDfs()"
+          >
+            DFS
+          </button>
+          <button class="sidebar-btn icon-only" (click)="reset()" title="Reset">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      @if (traversalResult().length > 0) {
+        <div class="sidebar-section">
+          <div class="section-label">Result</div>
+          <div class="traversal-result d-flex flex-wrap gap-1">
+            @for (val of traversalResult(); track $index; let last = $last) {
+              <span class="traversal-node">{{ val }}</span>
+              @if (!last) {
+                <mat-icon class="traversal-arrow">arrow_forward</mat-icon>
+              }
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="sidebar-footer">
+      @if (message()) {
+        <div class="msg-banner" style="margin-bottom: 10px">
+          {{ message() }}
+        </div>
+      }
+      <div class="section-label">Complexity</div>
+      <div class="complexity-grid">
+        <div class="complexity-chip">
+          <span class="chip-label">BFS / DFS</span
+          ><span class="chip-value amber">O(V+E)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Add Node</span
+          ><span class="chip-value green">O(1)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Add Edge</span
+          ><span class="chip-value green">O(1)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Remove Node</span
+          ><span class="chip-value amber">O(E)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="ds-canvas-area">
+    <ds-zoom-canvas>
+      @if (graph().nodes.length === 0) {
+        <p class="empty-state">Graph is empty — add a node to begin</p>
+      }
+      <svg
+        [attr.width]="svgWidth()"
+        [attr.height]="svgHeight()"
+        class="graph-svg"
+      >
+        <defs>
+          <marker
+            id="arrowhead"
+            markerWidth="8"
+            markerHeight="6"
+            refX="30"
+            refY="3"
+            orient="auto"
+          >
+            <polygon points="0 0, 8 3, 0 6" fill="#4b5563" />
+          </marker>
+        </defs>
+
+        @for (edge of edgeLines(); track $index) {
+          <line
+            [attr.x1]="edge.from.x"
+            [attr.y1]="edge.from.y"
+            [attr.x2]="edge.to.x"
+            [attr.y2]="edge.to.y"
+            class="graph-edge"
+            [attr.marker-end]="graph().directed ? 'url(#arrowhead)' : null"
+          />
+        }
+
+        @for (node of graph().nodes; track node.id) {
+          <g>
+            <circle
+              [attr.cx]="node.x"
+              [attr.cy]="node.y"
+              r="26"
+              class="graph-node"
+              [class.node-highlighted]="highlightedNodes().has(node.id)"
+            />
+            <text
+              [attr.x]="node.x"
+              [attr.y]="node.y + 5"
+              text-anchor="middle"
+              class="node-text"
+              [class.node-text-highlighted]="highlightedNodes().has(node.id)"
+            >
+              {{ node.id }}
+            </text>
+          </g>
+        }
+      </svg>
+    </ds-zoom-canvas>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<div class="home">
+  <header class="hero">
+    <h1 class="hero-title">
+      Data Structures<br /><span class="hero-sub">Visual Playground</span>
+    </h1>
+    <p class="hero-desc">
+      Interactive exercises to master fundamental data structures. Pick a topic
+      to start.
+    </p>
+  </header>
+
+  <div class="card-grid">
+    @for (card of cards; track card.route) {
+      <a
+        [routerLink]="card.route"
+        class="ds-card"
+        [style.--accent]="card.color"
+      >
+        <div class="card-icon">
+          <mat-icon>{{ card.icon }}</mat-icon>
+        </div>
+        <h3 class="card-title">{{ card.title }}</h3>
+        <p class="card-desc">{{ card.description }}</p>
+        <div class="card-tags">
+          @for (topic of card.topics; track topic) {
+            <span class="tag">{{ topic }}</span>
+          }
+        </div>
+        <span class="card-cta">
+          Explore <mat-icon class="cta-arrow">arrow_forward</mat-icon>
+        </span>
+      </a>
+    }
+  </div>
+</div>

@@ -1,0 +1,42 @@
+$accent: #6366f1;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.array-vis {
+  white-space: nowrap;
+}
+
+.array-cell {
+  .cell-value {
+    width: 56px;
+    height: 56px;
+    border: 2px solid $accent;
+    border-radius: 10px;
+    background: #1e2330;
+    color: #e2e8f0;
+    font-size: 17px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+
+    &.highlighted {
+      background-color: $accent;
+      color: white;
+      transform: scale(1.12);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+    }
+  }
+
+  .cell-index {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 500;
+  }
+}
+
+.empty-state {
+  padding: 32px;
+  color: #94a3b8;
+}

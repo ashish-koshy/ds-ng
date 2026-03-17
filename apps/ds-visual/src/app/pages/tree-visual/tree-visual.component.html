@@ -1,0 +1,158 @@
+<div class="ds-layout">
+  <aside class="ds-sidebar">
+    <div class="sidebar-body">
+      <div class="sidebar-header d-flex align-items-center gap-2">
+        <a routerLink="/" style="color: #64748b; text-decoration: none"
+          ><mat-icon>arrow_back</mat-icon></a
+        >
+        <h1>Binary Search Tree</h1>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Insert Node</div>
+        <div class="sidebar-controls">
+          <div class="input-row">
+            <input
+              class="sidebar-input"
+              type="number"
+              placeholder="Value"
+              [(ngModel)]="inputValue"
+            />
+            <button class="sidebar-btn primary" (click)="insertNode()">
+              <mat-icon>add</mat-icon> Insert
+            </button>
+            <button
+              class="sidebar-btn icon-only"
+              (click)="reset()"
+              title="Reset"
+            >
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Traversals</div>
+        <div class="controls-row">
+          <button
+            class="sidebar-btn"
+            [class.active]="activeTraversal() === 'inorder'"
+            (click)="runInorder()"
+          >
+            Inorder
+          </button>
+          <button
+            class="sidebar-btn"
+            [class.active]="activeTraversal() === 'preorder'"
+            (click)="runPreorder()"
+          >
+            Preorder
+          </button>
+        </div>
+        <div class="controls-row" style="margin-top: 8px">
+          <button
+            class="sidebar-btn"
+            [class.active]="activeTraversal() === 'postorder'"
+            (click)="runPostorder()"
+          >
+            Postorder
+          </button>
+          <button
+            class="sidebar-btn"
+            [class.active]="activeTraversal() === 'bfs'"
+            (click)="runBfs()"
+          >
+            BFS
+          </button>
+        </div>
+      </div>
+
+      @if (traversalResult().length > 0) {
+        <div class="sidebar-section">
+          <div class="section-label">Result</div>
+          <div class="traversal-result d-flex flex-wrap gap-1">
+            @for (val of traversalResult(); track $index; let last = $last) {
+              <span class="traversal-node">{{ val }}</span>
+              @if (!last) {
+                <mat-icon class="traversal-arrow">arrow_forward</mat-icon>
+              }
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="sidebar-footer">
+      @if (message()) {
+        <div class="msg-banner" style="margin-bottom: 10px">
+          {{ message() }}
+        </div>
+      }
+      <div class="section-label">Complexity</div>
+      <div class="complexity-grid">
+        <div class="complexity-chip">
+          <span class="chip-label">Search</span
+          ><span class="chip-value green">O(log n)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Insert</span
+          ><span class="chip-value green">O(log n)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Worst</span
+          ><span class="chip-value amber">O(n)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Traversal</span
+          ><span class="chip-value amber">O(n)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="ds-canvas-area">
+    <ds-zoom-canvas>
+      @if (!tree()) {
+        <p class="empty-state">Tree is empty — insert a node to begin</p>
+      }
+      <svg
+        [attr.width]="svgWidth()"
+        [attr.height]="svgHeight()"
+        class="tree-svg"
+      >
+        @for (node of renderNodes(); track node.value) {
+          @if (node.parentX !== undefined && node.parentY !== undefined) {
+            <line
+              [attr.x1]="node.parentX"
+              [attr.y1]="node.parentY"
+              [attr.x2]="node.x"
+              [attr.y2]="node.y"
+              class="tree-edge"
+            />
+          }
+        }
+        @for (node of renderNodes(); track node.value) {
+          <g>
+            <circle
+              [attr.cx]="node.x"
+              [attr.cy]="node.y"
+              r="22"
+              class="tree-node"
+              [class.node-highlighted]="node.highlighted"
+            />
+            <text
+              [attr.x]="node.x"
+              [attr.y]="node.y + 5"
+              text-anchor="middle"
+              class="node-text"
+              [class.node-text-highlighted]="node.highlighted"
+            >
+              {{ node.value }}
+            </text>
+          </g>
+        }
+      </svg>
+    </ds-zoom-canvas>
+  </div>
+</div>

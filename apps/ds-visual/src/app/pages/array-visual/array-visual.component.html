@@ -1,0 +1,107 @@
+<div class="ds-layout">
+  <aside class="ds-sidebar">
+    <div class="sidebar-body">
+      <div class="sidebar-header d-flex align-items-center gap-2">
+        <a routerLink="/" style="color: #64748b; text-decoration: none"
+          ><mat-icon>arrow_back</mat-icon></a
+        >
+        <h1>Array</h1>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Controls</div>
+        <div class="sidebar-controls">
+          <div class="input-row">
+            <input
+              class="sidebar-input"
+              type="number"
+              placeholder="Value"
+              [(ngModel)]="inputValue"
+            />
+            <input
+              class="sidebar-input"
+              type="number"
+              placeholder="Index"
+              [(ngModel)]="inputIndex"
+            />
+          </div>
+          <div class="controls-row">
+            <button class="sidebar-btn primary" (click)="push()">
+              <mat-icon>add</mat-icon> Push
+            </button>
+            <button class="sidebar-btn" (click)="pop()">
+              <mat-icon>remove</mat-icon> Pop
+            </button>
+          </div>
+          <div class="controls-row">
+            <button class="sidebar-btn" (click)="insertAt()">
+              <mat-icon>vertical_align_center</mat-icon> Insert At
+            </button>
+            <button class="sidebar-btn" (click)="removeAt()">
+              <mat-icon>delete_outline</mat-icon> Remove At
+            </button>
+            <button
+              class="sidebar-btn icon-only"
+              (click)="reset()"
+              title="Reset"
+            >
+              <mat-icon>refresh</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      @if (message()) {
+        <div class="msg-banner" style="margin-bottom: 10px">
+          {{ message() }}
+        </div>
+      }
+      <div class="section-label">Complexity</div>
+      <div class="complexity-grid">
+        <div class="complexity-chip">
+          <span class="chip-label">Access</span
+          ><span class="chip-value green">O(1)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Search</span
+          ><span class="chip-value amber">O(n)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Insert (end)</span
+          ><span class="chip-value green">O(1)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Insert (mid)</span
+          ><span class="chip-value amber">O(n)</span>
+        </div>
+        <div class="complexity-chip">
+          <span class="chip-label">Delete</span
+          ><span class="chip-value amber">O(n)</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="ds-canvas-area">
+    <ds-zoom-canvas>
+      <div class="array-vis d-flex align-items-end gap-3">
+        @for (item of array(); track $index) {
+          <div class="array-cell d-flex flex-column align-items-center gap-1">
+            <div
+              class="cell-value d-flex align-items-center justify-content-center"
+              [class.highlighted]="highlightIndex() === $index"
+            >
+              {{ item }}
+            </div>
+            <span class="cell-index">{{ $index }}</span>
+          </div>
+        }
+        @if (array().length === 0) {
+          <div class="empty-state">Array is empty</div>
+        }
+      </div>
+    </ds-zoom-canvas>
+  </div>
+</div>

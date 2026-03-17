@@ -1,0 +1,70 @@
+$accent: #8b5cf6;
+
+:host {
+  display: block;
+  height: 100%;
+}
+
+.tree-edge {
+  stroke: #2d3348;
+  stroke-width: 2;
+}
+
+.tree-node {
+  fill: #1e2330;
+  stroke: $accent;
+  stroke-width: 2.5;
+  transition: fill 0.3s ease;
+
+  &.node-highlighted {
+    fill: $accent;
+  }
+}
+
+.node-text {
+  fill: #e2e8f0;
+  font-size: 13px;
+  font-weight: 600;
+  pointer-events: none;
+
+  &.node-text-highlighted {
+    fill: white;
+  }
+}
+
+.traversal-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.traversal-node {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: $accent;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.traversal-arrow {
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+  color: #94a3b8;
+}
+
+.empty-state {
+  color: #94a3b8;
+  padding: 32px;
+}
+
+.sidebar-btn.active {
+  background: $accent;
+  color: white;
+  border-color: $accent;
+}

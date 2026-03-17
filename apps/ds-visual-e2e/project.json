@@ -1,0 +1,9 @@
+{
+  "name": "ds-visual-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/ds-visual-e2e/src",
+  "implicitDependencies": ["ds-visual"],
+  "// targets": "to see all targets run: nx show project ds-visual-e2e --web",
+  "targets": {}
+}

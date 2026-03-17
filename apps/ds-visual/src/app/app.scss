@@ -1,0 +1,56 @@
+.app-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #161921;
+  border-bottom: 1px solid #1e2330;
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav-brand {
+  font-size: 18px;
+  font-weight: 700;
+  color: #f1f5f9;
+  text-decoration: none;
+  letter-spacing: -0.3px;
+
+  mat-icon {
+    color: #818cf8;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    color: #818cf8;
+  }
+}
+
+.nav-link {
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: #e2e8f0;
+    background: #1e2330;
+  }
+
+  &.active {
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.12);
+  }
+}
+
+.app-main {
+  flex: 1;
+  overflow: hidden;
+}
