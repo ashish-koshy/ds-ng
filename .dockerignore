@@ -1,0 +1,14 @@
+node_modules
+dist
+.git
+.nx
+.husky
+.vscode
+*.md
+*.log
+.prettierrc
+.prettierignore
+.editorconfig
+commitlint.config.js
+jest.config.ts
+jest.preset.js
